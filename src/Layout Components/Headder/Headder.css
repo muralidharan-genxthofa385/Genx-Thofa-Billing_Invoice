@@ -1,0 +1,88 @@
+.header-wrapper {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.headder-container {
+  width: 100%;
+  height: 52px; /* Keep height fixed if header height shouldn't change */
+  padding: 1.5% 2.5%; /* Instead of 9px 24px */
+  border-bottom: 0.1rem solid var(--color-border);
+  background-color: var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headder-container div:first-child {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  gap: 2%; /* was 16px */
+}
+
+.headder-container label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 334px; /* Maintain max width if needed */
+}
+
+.headder-container label img {
+  position: absolute;
+  top: 22%;
+  left: 4%;
+  width: 21px;
+  height: auto;
+}
+
+.headder-container label input {
+  width: 100%;
+  height: 2.3rem;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-border);
+  outline: none;
+}
+
+.new-dropdown-button-container {
+  position: relative;
+}
+
+.new-dropdown-button-container button {
+  background-color: var(--color-accent);
+  color: var(--whitebg);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+}
+
+.new-options-drop {
+  position: absolute;
+  width: 100%;
+  height: 15vh;
+  bottom: -8rem; /* Previously -110px */
+  z-index: 5;
+  border-radius: 5px;
+  padding: 5%;
+  background-color: var(--color-accent);
+}
+
+.new-options-drop div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.new-options-drop .new-options-drop-links {
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  padding: 2%;
+  gap: 1rem;
+  font-size: 0.875rem;
+}

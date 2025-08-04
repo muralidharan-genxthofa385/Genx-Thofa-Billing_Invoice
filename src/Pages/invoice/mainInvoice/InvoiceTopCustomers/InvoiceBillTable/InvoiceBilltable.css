@@ -1,0 +1,386 @@
+.invoiceBilltableOverall{
+    padding-top: 2rem;
+    overflow: visible !important;
+}
+.item-table-label{
+    font-weight: 500;
+    font-size: 18px;
+}
+.invoice-bill-table{
+border-radius: 0 !important;
+border-left: none;
+border-right: none !important;
+overflow: visible !important;
+}
+.invoice-bill-table th{
+    background-color: var(--color-border-light);
+    font-weight: 600;
+    font-size: 12px;
+    border: 1px solid var(--color-border);
+    padding: 12px 16px;
+}
+.invoice-bill-table th:last-child{border-right: none !important;}
+
+.invoice-bill-table th:first-child{
+    width: 55%;
+    border-left: none !important;
+}
+.bill-table-body tr{
+    background-color: transparent !important;
+}
+.bill-table-body{
+    overflow: visible !important;
+}
+.items-headder{
+    text-align: start;
+}
+.items-headder input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    outline: none;
+}
+.items-headder-row-container td:last-child{display: flex;gap: 8px;justify-content: center;}
+.items-headder-row-container img{
+cursor: pointer;
+}
+.items-headder-row-container{
+    width: 100%;
+    padding: 1%;
+    display: flex;
+justify-content: space-between;
+overflow: visible !important;
+}
+
+.items-row input{
+    width: 80%;
+    height: 100%;
+    border: none;
+    font-weight: 400;
+    font-size: 14px;
+    outline: none;
+}
+.items-row td{
+    border: 1px solid var(--color-border);
+    font-size: 14px;
+    font-weight: 400;
+    width: 7%;
+
+}
+.items-row td:last-child{border-right: none !important;cursor: pointer;}
+.items-row td:first-child{
+text-align: left;
+border-left: none;
+}
+.discount-sect-table span{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.tax-sect-table{
+    width: 16%;
+
+    select{
+        width: 100%;
+        font-size: 14px;
+    font-weight: 400;
+    padding: 10%;
+    }
+}
+.discount-sect-table input{
+text-align: right;
+}
+.add-row-nd-headder-container{
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.table-row-add-actions{
+    display: flex;
+    gap: 16px;
+}
+.table-row-add-actions button{
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+   img{padding-right: 8px;}
+}
+.table-row-add-actions button:first-child{
+    background-color: var(--color-accent);
+    color: white;
+}
+.table-row-add-actions button:last-child{
+    background-color: var(--color-border-light);
+    color: black;
+    border: 1px solid var(--color-border);
+}
+.subTotalDiv{
+    display: flex;
+    gap: 255px;
+}
+.item-gst-discount-breakdown{
+    border-bottom: 1px solid var(--color-border);
+
+}
+.subtotal-container{
+    overflow: hidden;
+
+}
+.subTotalDiv span{font-weight: 600;font-size: 16px;}
+.subTotalDiv h4{font-weight: 600;font-size: 20px;}
+.total-summary{
+    padding-top: 8px;
+}
+.total-div{
+    display: flex;
+    justify-content: space-between;
+    span{
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-warning-text);
+    }
+}
+.total-summary span{
+font-weight: 600;
+font-size: 12px;
+color: var(--color-accent);
+cursor: pointer;
+display: flex;
+}
+.gst-and-discount-container{
+    border-bottom: 1px solid var(--color-border);
+}
+.hidendshowsummary{
+    overflow: hidden;
+    animation:hidendshowsummary 0.5s ease-in-out ;
+}
+@keyframes hidendshowsummary{
+    from{
+        transform: translatex(100%);
+    }
+    to{
+                transform: translatex(0%);
+
+    }
+}
+.customer-notes-text-area{
+    width: 400px;
+    height: 93px;
+    padding: 8px 0px 34px 12px;
+    resize: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    outline: none;
+    scrollbar-width: 0px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.invoice-save-print-buttons{
+    width: 100vw;
+    padding: 16px 33px 16px 33px;
+    border-top: 1px solid var(--color-border) !important;
+        border-bottom: 1px solid var(--color-border) !important;
+    position: fixed;
+    bottom: 5%;
+    background-color: white;
+    left: 11.7%;
+}
+.invoice-save-print-buttons button{
+    margin-left: 16px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+}
+.invoice-save-print-buttons button:hover{
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+.invoice-save-print-buttons button:first-child{
+    color: white;
+    background-color: var(--color-accent);
+
+}
+.invoice-save-print-buttons button:nth-child(2){
+background-color: var(--color-border-light);
+border: 1px solid var(--color-border);
+}
+.invoice-save-print-buttons button:nth-child(2) img{
+padding-right: 8px;
+height: 20px;
+}
+.invoice-save-print-buttons button:last-child{
+background-color: var(--color-border-light);
+border: 1px solid var(--color-border);
+}
+
+
+.payment-received-check{
+    display: flex;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+}
+.payment-received-check input{
+    accent-color: var(--color-accent);
+}
+.payment-mode-table-container{
+    padding-top: 24px;
+}
+.payment-mode-table{
+    width: 50%;
+    border-radius: 0px;
+    border-right: none !important;
+    border-left: none !important;
+   
+}
+.payment-mode-table-th-row th{
+    border: 1px solid var(--color-border) !important; 
+    font-size: 12px;
+font-weight: 600;
+}
+.payment-mode-table-td-row{
+    background-color: white !important;
+}
+.payment-mode-table-td-row td{
+    border: 1px solid var(--color-border);
+}
+.payment-mode-table th:first-child,.payment-mode-table-td-row td:first-child{border-left: none !important;}
+.payment-mode-table th:last-child,.payment-mode-table-td-row td:last-child{border-right: none !important;cursor: pointer;width: 10%;}
+
+.payment-mode-table th{
+    background-color: var(--color-border-light);
+}
+.payment-mode-table-enter-amount input{
+    height: fit-content;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 12px 16px;
+    font-size: 400;
+    font-size: 14px;
+    text-align: right;
+}
+.splitPayment-container{
+    width: 50%;
+    padding-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Split-payment-add-btn{
+ font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;  background-color: var(--color-border-light);
+border: 1px solid var(--color-border);
+}
+.Split-payment-add-btn img{padding-right: 8px;}
+.total-nd-balance-container h3{
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    gap: 33px;
+}
+.balance-amount-h3{
+color: var(--color-warning); 
+}
+.invoice-cancel-btn-render-container{
+    width: 100vw;
+    height: 100vh;
+    position:absolute;
+    top: 0%;
+    left: 0%;
+    background-color: rgba(0, 0, 0, 0.384);
+}
+.row-menu{
+    position: absolute;
+    top: 100%;
+    width: 150px;
+    right: 0;
+    min-width: 120px;
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    z-index: 9999;
+    overflow: visible;
+    padding: 1%;
+    div{font-size: 14px;font-weight: 400;}
+    img{padding-right: 5px;}
+}
+.row-items-menu{
+     position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 150px;
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    z-index: 9999;
+    overflow: visible;
+}
+.row-menu > div, .row-items-menu > div {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.row-menu > div:hover, .row-items-menu > div:hover {
+  background: #f5f5f5;
+}
+.clone-icon{
+    margin-right: 6px;
+}
+.Customer-Switch-Confirmation-container{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.301);
+    position: absolute;
+    left: 0%;
+    top: 0%;
+}
+.customer-Switch-box .customer-Switch-box-contents{
+    width: 32%;
+    border-radius: 10px;
+    min-height: 30vh;
+    background-color: white;
+    padding: 20px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.customer-Switch-box div h2{
+    font-size: 24px;
+    width: 100%;
+    font-weight: 600;
+    color: var(--color-warning);
+    display: flex;
+    gap: 1%;
+
+}
+.customer-switch-buttons{
+    display: flex;
+}
+.customer-switch-buttons button{
+    padding: 8px 12px;
+    width: max-content;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-border-light);
+    border-radius: 4px;
+}
+.customer-switch-buttons button:first-child:hover{
+background-color: var(--color-warning);
+color: white;
+}
+.customer-switch-buttons button:last-child:hover{
+background-color: var(--color-accent);
+color: white;
+}

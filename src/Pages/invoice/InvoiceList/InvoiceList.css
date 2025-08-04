@@ -1,0 +1,541 @@
+.invoice-list-container {
+  padding: 0rem;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: var(--whitebg);
+  padding: 15px 0px;
+  border-radius: 10px;
+}
+
+.invoice-header h2 {
+  font-size: 28px;
+  font-weight: 600 !important;
+  color: var(--color-black);
+}
+
+.invoice-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-grow: 1;
+}
+.search-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.tableActionLinks{
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+}
+.inv-table-action-icons{
+  background-color: white;
+  margin-top: 20%;
+  box-shadow: 1px 1px 2px 0.3px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.inv-table-actions{
+  position: absolute;
+  left: 29%;
+  bottom: 0%;
+  top: 24%;
+  z-index: 10;
+}
+
+.clear-filters {
+  color: var(--color-accent);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: var(--whitebg);
+  width: 350px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  font-size: 14px;
+  background-color: transparent;
+  width: 100%;
+}
+
+.search-box img {
+  width: 16px;
+  height: 16px;
+}
+
+.status-dropdown-select select option:hover,
+.status-dropdown-select select option:focus,
+.rows-per-page select option:hover,
+.rows-per-page select option:focus {
+  background-color: var(--color-accent) !important;
+  color: var(--whitebg) !important;
+}
+
+.status-dropdown-select select option:checked,
+.rows-per-page select option:checked {
+  background-color: var(--color-accent) !important;
+  color: var(--whitebg) !important;
+}
+
+.status-dropdown {
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: var(--whitebg);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-warning-text);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.status-dropdown svg {
+  font-size: 16px;
+}
+
+.filter-icon {
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: var(--whitebg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.advanced-filter{
+  border: 1px solid var(--color-border);
+  padding: 5.5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+
+  img{
+     width: 16px;
+  height: 16px;
+  }
+}
+.filter-icon img {
+  width: 16px;
+  height: 16px;
+}
+
+.filter-Options-container {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.295);
+  position: absolute;
+  z-index: 10;
+  left: 0%;
+  top: 0%;
+}
+
+.filter-Options {
+  margin-left: 42%;
+  margin-top: 10%;
+  padding: 40px;
+  width: 320px;
+  background-color: var(--whitebg);
+  border-radius: 8px;
+
+}
+
+.filter-Options-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  font-weight: 600;
+
+  div {
+    display: flex;
+    gap: 16px;
+
+    button {
+      width: 96px;
+      font-size: 14px;
+      height: 33px;
+      background-color: var(--color-border-light);
+      border: 1px solid var(--color-border);
+      color: var(--color-warning-text);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button.selected {
+      background-color: var(--color-accent);
+      color: var(--whitebg);
+    }
+
+    button:hover {
+      background-color: var(--color-accent);
+      color: var(--whitebg);
+    }
+  }
+}
+
+.filter-option-dates {
+  display: flex;
+  justify-content: space-between;
+
+  label {
+    width: 45%;
+  }
+
+  input {
+    width: 100%;
+    height: 37px;
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 2% 3%;
+    border: 1px solid var(--color-border);
+  }
+}
+
+.filter-Options-buttons {
+  button {
+    width: 96px;
+    font-size: 14px;
+    height: 33px;
+    background-color: var(--color-border-light);
+    border: 1px solid var(--color-border);
+    color: var(--color-warning-text);
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  button:hover {
+
+    background-color: var(--color-accent);
+    color: var(--whitebg);
+  }
+}
+
+.action-buttons {
+  font-size: 16px;
+  display: flex;
+  gap: 16px;
+ 
+}
+
+.create-invoice-btn {
+  background-color: var(--color-accent);
+  color: var(--whitebg);
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.create-invoice-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.options-btn {
+  background-color: var(--whitebg);
+  color: var(--color-warning-text);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.options-btn svg {
+  font-size: 16px;
+}
+
+
+.invoice-table-section {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  border-bottom-left-radius: 0%;
+  border-bottom-right-radius: 0%;
+  overflow: hidden;
+}
+
+.invoice-table-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--whitebg);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.invoice-table-section th,
+.invoice-table-section td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.invoice-table-section td {
+  padding: 12px 15px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.invoice-table-section th {
+  background-color: var(--whitebg);
+  font-weight: 600;
+  color: var(--color-warning-text);
+  font-size: 14px;
+}
+
+.invoice-table-section tr:last-child td {
+  border-bottom: none;
+}
+
+.invoice-table-section .status-cancelled {
+  background-color: #ffe5e5;
+  color: var(--color-warning);
+}
+
+.invoice-table-section .status-pending {
+  background-color: #eae2ff;
+  color: var(--color-highlight);
+}
+
+.invoice-table-section .status-badge {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.invoice-table-section tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.invoice-table-section .Link-tag {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.invoice-table-section .status-badge {
+  padding: 5px 10px;
+  border-radius: 9px;
+  width: 80%;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invoice-table-section .status-paid {
+  background-color: #D6FFD6;
+  color: var(--color-success-dark);
+}
+
+.invoice-table-section .status-unpaid {
+  background-color: #FBDFDF;
+  color: var(--color-warning);
+}
+
+.invoice-table-section .status-advance {
+  background-color: #F1EBFF;
+  color: var(--color-highlight);
+}
+
+.invoice-table-section .balance-due-red {
+  color: var(--color-warning);
+  font-weight: 500;
+}
+
+.invoice-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.rows-per-page {
+  position: relative;
+}
+.rows-per-page span,
+.pagination-info span {
+  font-size: 14px;
+  color: #6c757d;
+}
+.rows-per-page span:first-child {
+  margin-right: 5px;
+}
+.rows-per-page span:last-child {
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.pagination-controls svg {
+  color: #6c757d;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.pagination-controls svg[style*="cursor: not-allowed"] {
+  color: #ccc;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  background-color: red;
+  z-index: 11;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  padding: 5px 0;
+}
+.dropdown-menu div {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-warning-text);
+}
+.dropdown-menu div:hover {
+  background-color: #f1f1f1;
+}
+.rows-per-page .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+}
+.status-dropdown .dropdown-menu {
+  top: 100%;
+  bottom: auto;
+}
+.filter-status-dropdown {
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: var(--whitebg);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-warning-text);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  min-width: 150px;
+}
+
+.filter-status-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.filter-status-display svg {
+  font-size: 16px;
+}
+
+.filter-status-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--whitebg);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+}
+
+.filter-status-dropdown-menu div {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  border-bottom: 1px solid var(--color-border-light);
+  width: 100%;
+  text-align: left;
+}
+
+.filter-status-dropdown-menu div:last-child {
+  border-bottom: none;
+}
+
+.filter-status-dropdown-menu div:hover {
+  background-color: var(--color-accent);
+  color: var(--whitebg);
+  transform: translateX(2px);
+}
+
+.filter-status-dropdown-menu div.selected {
+  background-color: var(--color-accent);
+  color: var(--whitebg);
+  font-weight: 500;
+}
+
+.filter-status-dropdown-menu div.selected:hover {
+  background-color: var(--color-accent);
+  color: var(--whitebg);
+  transform: translateX(2px);
+}
+
+.status-dropdown-select select option:hover,
+.status-dropdown-select select option:focus,
+.rows-per-page select option:hover,
+.rows-per-page select option:focus {
+  background-color: var(--color-accent) !important;
+  color: var(--whitebg) !important;
+}
+
+.status-dropdown-select select:focus option:checked,
+.rows-per-page select:focus option:checked {
+  background-color: var(--color-accent) !important;
+  color: var(--whitebg) !important;
+}
+
+.status-dropdown-select select,
+.rows-per-page select {
+  cursor: pointer;
+}
+
+.status-dropdown-select select:hover,
+.rows-per-page select:hover {
+  border-color: var(--color-accent);
+}
+.rows-per-page-drop{
+  width: 28%;
+}
+
+/*--------------------------------------------------------- inv-advanced-filter-------------------------------------------------------*/

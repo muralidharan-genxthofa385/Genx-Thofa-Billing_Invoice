@@ -1,0 +1,86 @@
+.newExpenseHeading{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5%;
+}
+.new-Expenses-Form-container{
+    padding-top: 32px;
+}
+.new-expwnses-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.new-expwnses-row-left{
+width: 48%;
+}
+.new-expwnses-row-right{
+width: 48%;
+}
+.expenses-label{
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+.new-expwnses-row input{
+padding: 8px 12px;
+border-radius: 4px;
+border: 1px solid var(--color-border);
+font-weight: 400;
+font-size: 14px;
+outline: none;
+}
+.expenses-label textarea{
+    width: 100%;
+    padding: 8px 12px 64px 12px;
+    resize: none;
+border-radius: 4px;
+border: 1px solid var(--color-border);
+font-weight: 400;
+font-size: 14px;
+outline: none;
+}
+.new-expenses-button-container{
+     border-top: 1px solid var(--color-border);
+    width: 100%;
+    padding: 16px 32px;
+    position: fixed;
+    top: 87%;
+    background-color: var(--whitebg);
+    left: 11.8%;
+}
+.new-expenses-button-container button{
+padding: 8px 12px;
+border-radius: 4px;
+font-size: 14px;
+font-weight: 500;
+border: none;
+}
+
+.new-expenses-button-container button:first-child{background-color: var(--color-accent);color: white;}
+.new-expenses-button-container button:last-child{background-color: transparent;color: var(--color-black);border: 1px solid var(--color-border);margin-left: 1rem;}
+
+.expenses-nav-container{
+    display: flex;
+    justify-content: space-between;
+}
+.newExpenseHeading{
+    width: 50%;
+}
+.EditExpenses{
+    background-color: var(--color-accent);
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: flex;
+    gap: 10%;
+    align-items: center;
+    border-radius: 4px;
+    
+}

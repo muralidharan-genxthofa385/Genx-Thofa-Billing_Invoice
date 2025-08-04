@@ -1,0 +1,138 @@
+.customer-info-headding{
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-black);width: max-content;
+}
+.customer-view-form-container{
+    padding-top: 2rem;
+    width: 100%;
+}
+.customer-view-form-container input{
+    font-weight: 400;
+    font-size: 14px;
+}
+.customerview-form-label{
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    padding-top: 0.50rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: var(--color-black);
+}
+.customer-info-headding-container{
+    display: flex;
+    justify-content: space-between;
+}
+.customer-view-row{
+    display: flex;
+    justify-content: space-between;
+}
+.customer-view-row-left{
+width: 50%;
+
+}
+.customer-view-row-right{
+width: 50%;
+
+}
+.view-customer-edit-button{
+    text-decoration: none;
+    background-color: var(--color-accent);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    img{width: 19px;height: 19px;}
+}
+.customer-view-gstin-input{
+    width: 12.5rem;
+    padding: 8px 12px;
+    height: 2.188rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;outline: none;
+}
+.customer-view-customer-info,.Billing-ShippingAddress-customer-view{
+    padding-top: 2rem;
+}
+.customer-view-headding-label{
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--color-accent);
+}
+.customer-view-customer-info input{
+    outline: none;
+    border: 1px solid var(--color-border);
+    height: 2.313rem;
+    width: 560px;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+.customer-view-customer-info .customer-view-row{
+    padding-top: 0.75rem;
+     display: flex;
+    align-items: center;
+}
+.salutation-name-input{
+    width: 2.75rem !important;
+        padding: 4px 5px !important;
+}
+.Billing-ShippingAddress-customer-view .customer-view-row{
+    display: flex;
+    justify-content: space-between;
+}
+.Billing-ShippingAddress-customer-view textarea{
+    width: 96%;
+    padding: 8px 12px 30px 12px;
+    resize: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;outline: none;
+}
+#remarks-textarea{
+    width: 400px;
+}
+.salutation-name-wrapper{
+    display: flex;
+    gap: 1%;
+
+    input:last-child{
+        width: 560px !important;
+    }
+}
+.customers-view-buttons{
+     border-top: 2px solid var(--color-border);
+    width: 100%;
+    padding: 16px 32px;
+    position: fixed;
+    top: 87%;
+    background-color: var(--whitebg);
+    left: 11.7%;
+    animation: custEditBtns 0.7s ease-in-out;
+
+}
+@keyframes custEditBtns{
+    from{
+        transform: translatey(100%);
+    }
+    to{
+        transform: translateY(0%);
+    }
+}
+.customers-view-buttons button{
+padding: 8px 12px;
+border-radius: 4px;
+font-size: 14px;
+font-weight: 500;
+border: none;
+}
+.customers-view-buttons button:first-child{background-color: var(--color-accent);color: white;}
+.customers-view-buttons button:last-child{background-color: transparent;color: var(--color-black);border: 1px solid var(--color-border);margin-left: 1rem;}

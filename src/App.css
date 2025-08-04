@@ -1,0 +1,69 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+*{
+  font-family: var(--font-heading);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+:root {
+  /* Font Family */
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Bricolage Grotesque', sans-serif;
+
+  /* Font Sizes - Desktop */
+  --font-h1-desktop: 48px;
+  --font-h2-desktop: 40px;
+  --font-h3-desktop: 32px;
+  --font-h4-desktop: 28px;
+  --font-h5-desktop: 24px;
+  --font-h6-desktop: 20px;
+  --font-button-desktop: 18px;
+  --font-body-desktop: 16px;
+  --font-body-small-desktop: 14px;
+  --font-caption-desktop: 12px;
+
+  /* Font Sizes - Tab / Mobile (you can adjust based on actual specs) */
+  --font-h1-mobile: 36px;
+  --font-h2-mobile: 32px;
+  --font-h3-mobile: 28px;
+  --font-h4-mobile: 24px;
+  --font-h5-mobile: 20px;
+  --font-h6-mobile: 18px;
+  --font-button-mobile: 16px;
+  --font-body-mobile: 14px;
+
+  /* Colors */
+  --whitebg: #FCFCFC;
+  --color-black: #0D0D0D;
+  --color-success-dark: #008000;
+  --color-success-light: #D6FFD6;
+  --color-accent: #0466C8;
+  --color-warning: #CF1717;
+  --color-warning-text: #595959;
+  --color-warning-bg: #F8DFDF;
+  --MildBlue: #E2E8F0;
+  --color-border-light: #F2F4F8;
+  --color-border:#C9D4E3;
+  --color-highlight: #4D00FF;
+  --color-highlight-light: #F1EBFF;
+  --color-input:#666666;
+
+}
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-textfield-decoration-container,
+input[type="password"]::-webkit-inner-spin-button,
+input[type="password"]::-webkit-clear-button,
+input[type="password"]::-webkit-password-toggle-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.asd{
+  background-color: rgba(0, 0, 0, 0.253);
+}

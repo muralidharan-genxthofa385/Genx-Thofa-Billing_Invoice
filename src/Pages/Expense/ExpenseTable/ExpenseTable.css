@@ -1,0 +1,85 @@
+.expenseTableHeadder{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:center ;
+}
+.expense-headder-heading{
+    font-weight: 600;
+    font-size: 28px;
+    text-decoration: none;
+    color: var(--color-black);
+}
+.expenseTable-Filter-Container{
+display: flex;
+align-items: center;
+gap: 16px;
+}
+.clear-filter-span{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-accent);
+    cursor: pointer;
+    img{
+        width: 19px;
+        height: 19px;
+    }
+}
+.expense-Table-searchbar-label{
+    position: relative;
+}
+.expense-Table-searchbar-label img{
+     position: absolute;
+            top: 22%;
+            left: 3%;
+            
+}
+.expense-Table-searchbar-label input{
+   width: 334px;
+    padding: 9px 38px;
+    height: 36px;
+    outline: none;
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    border-radius: 4px;
+}
+.addicon{
+    color: white;
+    padding-left: 4px;
+    font-size: 24px;
+}
+.addExpenseButton{
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.expenseTable-Container{
+    margin-top: 32px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+.expense-table-headder-row th{
+    text-align: left;
+}
+.expense-table-details-row{
+
+}
+.expense-table-details-row td{
+        text-align: left;
+        font-size: 14px;
+        font-weight: 400;
+}
+.Expense-customerName{
+    text-decoration: none;
+    color: var(--color-accent);
+}
+.expense-pagination{
+    display: flex;
+}

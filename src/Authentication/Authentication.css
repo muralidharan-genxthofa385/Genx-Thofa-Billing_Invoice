@@ -1,0 +1,107 @@
+*{
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0px;
+}
+.Login-Page-Container{
+    background-color: var(--MildBlue);
+}
+.login-form{
+    width: 31.25rem;
+    height: 31.5rem;
+    background-color:var(--whitebg);
+    border-radius: 20px;
+
+    form{
+        width: 100%;
+        position: relative;
+        height: 100%;
+        padding: 40px;
+        font-family: var( --headdingFontfamily);
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        div:first-child{
+        img{
+            width: 276px;
+            height: 60px;
+        }}
+
+        .invoice-login-form-group{   
+            display: flex;
+            flex-direction: column;
+            gap: 32px !important; 
+
+         
+            label{
+                width: 100%;
+                display: flex;
+                gap: 8px !important;
+                flex-direction: column;
+font-family: var(--headdingFontfamily);
+font-weight: 500;
+font-size: 18px;
+font-style: bold;
+
+img{
+    left: 90%;
+    top: 61% !important;
+    cursor: pointer;
+}
+
+input{
+    width: 100%;
+    border-radius: 10px;
+    height: 45px;
+    font-size: 14px;
+    border: 1.5px solid var( --color-border);
+    padding: 12px;
+    outline: none;
+    color: var(--color-input);
+    background-color: var(--whitebg);
+}
+input:focus{
+        border: 1.5px solid var(--color-accent);
+}
+
+}}
+       
+        .log-btn{
+            padding: 16px 24px;
+color: white;
+background-color: var(--color-accent);
+border-radius: 10px;
+border: none;
+margin-top: 17px;
+
+        }
+    }
+    
+}
+.forget-pass{
+    position: absolute;
+    top: 69% !important;
+    font-size: 16px;
+    left: 65%;
+    font-weight: 600;
+    color: var(--color-accent);
+}
+.spinner{
+  --d:12px;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 
+    calc(1*var(--d))      calc(0*var(--d))     0 0,
+    calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+    calc(0*var(--d))      calc(1*var(--d))     0 2px,
+    calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+    calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+    calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+    calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+  animation: l27 1s infinite steps(8);
+}
+@keyframes l27 {
+  100% {transform: rotate(1turn)}
+}

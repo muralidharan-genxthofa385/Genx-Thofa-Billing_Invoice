@@ -1,0 +1,70 @@
+.inv-customer-select-drop{
+    display: flex;
+    align-items: center;
+    gap: 1%;
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 16px !important;
+}
+.cust-name-nd-SalesPer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2%;
+
+}
+.invoice-label{
+    font-weight: 600;
+
+    font-size: 16px;
+    color: var(--color-black);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.invoice-label input,select{
+   
+}
+.invoice-label img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 60%;
+    left: 2%;
+    z-index: 1;
+}
+.select-customer-label,.select-salesperson-label{
+    width: 50%;
+    position: relative;
+}
+.select-salesperson-dropdown,.select-customer-dropdown{
+        width: 100%;
+         font-size: 14px;
+    font-weight: 400; 
+}
+.invoice-top-due-dte-details{
+    width: 81vw;
+    padding-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3.6%;
+}
+.invoice-duedate-details label:first-child input{
+background-color: var( --color-border-light);
+}
+.invoice-duedate-details input,select{
+width: 310px;
+height: 37px;
+padding: 8px 12px;
+border: 1px solid var(--color-border);
+outline: none;
+font-weight: 400;
+font-size: 14px;
+border-radius: 4px;
+}
+.inv-cust-details{
+    padding-top: 2rem;
+}
+.invoice-top-due-dte-details input,select{
+    width: 286px;
+}

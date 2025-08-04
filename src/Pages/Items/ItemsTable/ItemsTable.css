@@ -1,0 +1,13 @@
+.items-headder{
+    display: flex;
+    align-items: center;
+    gap: 48.3%;
+}
+.items-headder h3:first-child{
+    font-weight: 600;
+    font-size: 28px;
+}
+.clear-filter-items{
+    color: var(--color-accent);
+}
+

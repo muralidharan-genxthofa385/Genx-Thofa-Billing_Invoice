@@ -1,0 +1,150 @@
+.Dashboard-container {
+  padding: 1rem;
+}
+
+/* Amount Display Container */
+.dash-board-amount-display-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.1rem;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 1rem;
+}
+
+.dash-board-amount-display-container > div {
+  flex: 1 1 300px;
+  padding: 1.25rem 1.8rem;
+  border-radius: 10px;
+  color: var(--whitebg);
+  min-width: 280px;
+}
+
+.dash-board-amount-display-container h5 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dash-board-amount-display-container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Background Colors */
+.dash-board-total-display {
+  background-color: var(--color-accent);
+}
+.dash-board-Paid-display {
+  background-color: var(--color-success-dark);
+}
+.dash-board-unpaid-display {
+  background-color: var(--color-warning);
+}
+
+/* Table Layout */
+.dashboard_tables {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-top: 2rem;
+  justify-content: space-between;
+}
+
+.dashboard_tables .recent-transaction-table,
+.dashboard_tables .recent-expenses-table {
+  flex: 1 1 100%;
+  max-width: 100%;
+  width: 580px;
+  height: auto;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+thead tr {
+  background-color: #f9fafb;
+}
+
+thead th {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-black);
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+tbody td {
+  font-size: 0.875rem;
+  color: var(--color-black);
+  padding: 0.75rem 1rem;
+    text-align: center;
+
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--color-border);
+}
+
+/* Status badge styles */
+.status-paid {
+  background: var(--color-success-dark);
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+.status-notpaid {
+  background-color: #FBDFDF;
+  color: var(--color-warning);
+  padding: 4px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+.status-advance {
+  background: var(--color-highlight);
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .dashboard_tables .recent-transaction-table,
+  .dashboard_tables .recent-expenses-table {
+    flex: 1 1 48%;
+  }
+}
+
+.thofa-logo {
+  margin-top: 200px;
+  transition: all ease-in-out 0.5s;
+  animation: thofalogo 0.6s infinite alternate;
+}
+
+@keyframes thofalogo {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+}

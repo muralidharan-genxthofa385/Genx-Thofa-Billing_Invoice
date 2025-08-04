@@ -1,0 +1,17 @@
+.new-item-head{
+font-size: 20px;
+font-weight: 600;
+color: black;
+text-decoration: none;
+}
+.expenses-input{
+    
+}
+.item-quantity-expenses-label input{
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    font-weight: 400;
+    font-size: 14px;
+    outline: none;
+    border-radius: 4px;
+}

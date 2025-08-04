@@ -1,0 +1,26 @@
+.inv-add-New_customer-container{
+    width: 85.9%;
+   height:90vh;
+    background-color:white;
+    position: absolute;
+    padding: 2%;
+    top: 6.7%;
+    right: 0%;
+    z-index:12;
+    overflow: scroll;
+}
+.Back-To-InvCreation-cont{
+    position: absolute;
+    z-index: 9;
+    left: 0%;
+    padding: 0% 3%;
+    top: 5%;
+    background-color: white;
+    width: 20%;
+}
+.Back-To-InvCreation{
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}

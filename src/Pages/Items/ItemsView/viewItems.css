@@ -1,0 +1,9 @@
+.viewItems-headder{
+    width: 100%;
+}
+.view-items-headder-actions{
+    width: 30%;
+    display: flex;
+    justify-content: right;
+    gap: 5%;
+}
