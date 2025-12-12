@@ -4,7 +4,6 @@ import expenseout from '../../assets/Icons/expenseOutIcon.svg'
 import { fetchInvoice } from '../../service/invoiceService';
 import { getExpences } from '../../service/ExpensesService';
 import { CgDanger } from "react-icons/cg";
-import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { GiMoneyStack } from "react-icons/gi";
 import { GiTakeMyMoney } from "react-icons/gi";
 

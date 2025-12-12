@@ -15,11 +15,11 @@ import tr_editIcon from '../../../assets/Icons/tableEditIcon.svg'
 import tr_deleteIcon from '../../../assets/Icons/tableDelete.svg'
 import { toast } from 'react-toastify';
 import InvoiceAdvFilter from './InvoiceAdvFilter';
-import { useDispatch } from 'react-redux';
 
 interface filterdata {
   name: string,
   mobile: string,
+  amount_received:number,
   mail: string,
   customer_type: string,
   invoice_date: string,
@@ -38,6 +38,7 @@ interface invoiceLists {
     invoice_number: string,
     total_amount: number,
     grand_total:number,
+    balance_amount:number
     customer: { customer_name: string,balance_due:number },
     status: string,
     due_date: string,
@@ -163,73 +164,76 @@ useEffect(() => {
       });
   }
 };
-const [filtereddata, setfiltereddata] = useState<filterdata>({
-  name: '',
-  mobile: '',
-  mail: '',
-  customer_type: '',
-  invoice_date: '',
-  due_date: '',
-  status: '',
-  createdBtwFrom: '',
-  createdBtwTo: '',
-  lastInvoiceDateFrom: '',    
-  lastInvoiceDateTo: '',      
-  created_at: '',             
-  balanceMin: 0,
-  balanceMax: 0,
-});
-const resetAdvancedFilter = () => {
-  setfiltereddata({
-    name: '',
-    mobile: '',
-    mail: '',
-    customer_type: '',
-    invoice_date: '',
-    due_date: '',
-    status: '',
-    createdBtwFrom: '',
-    createdBtwTo: '',
-    lastInvoiceDateFrom: '',
-    lastInvoiceDateTo: '',
-    created_at: '',
-    balanceMin: 0,
-    balanceMax: 0,
-  });
-  setFilteredInvoices(allInvoices);
-};
+// const [filtereddata, setfiltereddata] = useState<filterdata>({
+//   name: '',
+//   mobile: '',
+//   mail: '',
+//   customer_type: '',
+//   invoice_date: '',
+//   due_date: '',
+//   status: '',
+//   createdBtwFrom: '',
+//   createdBtwTo: '',
+//   lastInvoiceDateFrom: '',    
+//   lastInvoiceDateTo: '',      
+//   created_at: '',             
+//   balanceMin: 0,
+//   balanceMax: 0,
+//   amount_received:0,
+// });
+// const resetAdvancedFilter = () => {
+//   setfiltereddata({
+//     name: '',
+//     mobile: '',
+//     mail: '',
+//     customer_type: '',
+//     invoice_date: '',
+//     due_date: '',
+//     status: '',
+//     createdBtwFrom: '',
+//     createdBtwTo: '',
+//     lastInvoiceDateFrom: '',
+//     lastInvoiceDateTo: '',
+//     created_at: '',
+//     balanceMin: 0,
+//     balanceMax: 0,
+//       amount_received:0,
 
-const applyAdvancedFilter = () => {
-  const filtered = allInvoices.filter((fil) => {
-    const createdAt = new Date(fil.created_at);
-    const invoiceBalance = Number(fil.balance_due) || 0;
-    const min = Number(filtereddata.balanceMin) || 0;
-    const max = Number(filtereddata.balanceMax) || 0;
+//   });
+//   setFilteredInvoices(allInvoices);
+// };
 
-    const matchesCreatedBetween =
-      (!filtereddata.createdBtwFrom || createdAt >= new Date(filtereddata.createdBtwFrom)) &&
-      (!filtereddata.createdBtwTo || createdAt <= new Date(filtereddata.createdBtwTo));
+// const applyAdvancedFilter = () => {
+//   const filtered = allInvoices.filter((fil) => {
+//     const createdAt = new Date(fil.created_at);
+//     const invoiceBalance = Number(fil.balance_due) || 0;
+//     const min = Number(filtereddata.balanceMin) || 0;
+//     const max = Number(filtereddata.balanceMax) || 0;
 
-    const matchesBalanceRange =
-      (!filtereddata.balanceMin || invoiceBalance >= min) &&
-      (!filtereddata.balanceMax || invoiceBalance <= max);
+//     const matchesCreatedBetween =
+//       (!filtereddata.createdBtwFrom || createdAt >= new Date(filtereddata.createdBtwFrom)) &&
+//       (!filtereddata.createdBtwTo || createdAt <= new Date(filtereddata.createdBtwTo));
 
-    return (
-      matchesCreatedBetween &&
-      (!filtereddata.name || fil.customer?.customer_name?.toLowerCase().includes(filtereddata.name.trim().toLowerCase())) &&
-      (!filtereddata.mobile || fil.customer?.phone?.toLowerCase().includes(filtereddata.mobile.trim().toLowerCase())) &&
-      (!filtereddata.mail || fil.customer?.email?.toLowerCase().includes(filtereddata.mail.trim().toLowerCase())) &&
-      (!filtereddata.customer_type || fil.customer?.customer_type?.toLowerCase().includes(filtereddata.customer_type.trim().toLowerCase())) &&
-      (!filtereddata.invoice_date || fil.invoice_date?.slice(0, 10) === filtereddata.invoice_date.trim()) &&
-      (!filtereddata.due_date || fil.due_date?.slice(0, 10) === filtereddata.due_date.trim()) &&
-      (!filtereddata.status || fil.status?.toLowerCase().includes(filtereddata.status.trim().toLowerCase())) &&
-      matchesBalanceRange
-    );
-  });
-  setFilteredInvoices(filtered);
-};
+//     const matchesBalanceRange =
+//       (!filtereddata.balanceMin || invoiceBalance >= min) &&
+//       (!filtereddata.balanceMax || invoiceBalance <= max);
 
+//     return (
+//       matchesCreatedBetween &&
+//       (!filtereddata.name || fil.customer?.customer_name?.toLowerCase().includes(filtereddata.name.trim().toLowerCase())) &&
+//       (!filtereddata.mobile || fil.customer?.phone?.toLowerCase().includes(filtereddata.mobile.trim().toLowerCase())) &&
+//       (!filtereddata.mail || fil.customer?.email?.toLowerCase().includes(filtereddata.mail.trim().toLowerCase())) &&
+//       (!filtereddata.customer_type || fil.customer?.customer_type?.toLowerCase().includes(filtereddata.customer_type.trim().toLowerCase())) &&
+//       (!filtereddata.invoice_date || fil.invoice_date?.slice(0, 10) === filtereddata.invoice_date.trim()) &&
+//       (!filtereddata.due_date || fil.due_date?.slice(0, 10) === filtereddata.due_date.trim()) &&
+//       (!filtereddata.status || fil.status?.toLowerCase().includes(filtereddata.status.trim().toLowerCase())) &&
+//       matchesBalanceRange
+//     );
+//   });
+//   setFilteredInvoices(filtered);
+// };
 
+console.log(allInvoices[0])
 
 
     return (
@@ -283,12 +287,12 @@ const applyAdvancedFilter = () => {
                             <th>Customer Name</th>
                             <th style={{ textAlign: "center" }}>Status</th>
                             <th>Due Date</th>
-                            <th>Amount</th>
+                            <th>Amount Received</th>
                             <th style={{ textAlign: "center" }}>Balance Due</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {currentTableData.map((row, index) => (
+                        {allInvoices.map((row, index) => (
                             <tr key={row.id} style={{ position: "relative" }}>
                                 <td  style={{ cursor: "pointer", position: "relative" }}>
                                     
@@ -310,8 +314,8 @@ const applyAdvancedFilter = () => {
                                     <span className={`status-badge status-${row.status?.toLowerCase().replace(/\s+/g, "-")}`}> {row.status?.toUpperCase()}</span>
                                 </td>
                                 <td>{row.due_date.slice(0, 10)}</td>
-                                <td>₹ {row.grand_total}</td>
-                                <td style={{ textAlign: "center" }} className={row.total_amount !== 0 ? "balance-due-red" : ""}>₹ {(row.customer.balance_due).toFixed(2)}</td>
+                                <td>₹ {row.amount_received}</td>
+                                <td style={{ textAlign: "center" }} className={row.total_amount !== 0 ? "balance-due-red" : ""}>₹ {row.balance_amount.toFixed(2)}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -341,7 +345,7 @@ const applyAdvancedFilter = () => {
                         style={{ cursor: currentPage === totalPages || totalPages === 0 ? 'not-allowed' : 'pointer', opacity: currentPage === totalPages || totalPages === 0 ? 0.5 : 1 }} />
                 </div>
             </div>
-              {advancedFilter && (
+              {/* {advancedFilter && (
   <InvoiceAdvFilter
     advancedFilter={advancedFilter}
     setFilteredInvoices={setFilteredInvoices}
@@ -353,7 +357,8 @@ const applyAdvancedFilter = () => {
     setfiltereddata={setfiltereddata}
       resetAdvancedFilter={resetAdvancedFilter}
   />
-)} 
+)}  */}
+
 </div>
     )
 }
