@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import Inv_Top_cust_details from './InvoiceTopCustomers/Inv_Top_cust_details';
 import InvoiceBilltable from './InvoiceTopCustomers/InvoiceBillTable/InvoiceBilltable';
 import InvCustCreation from '../../Customerspage/CustomerCreationForm/InvCustCreation';

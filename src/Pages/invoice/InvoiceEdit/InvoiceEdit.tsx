@@ -21,7 +21,7 @@ import { BiSolidBasket } from "react-icons/bi";
 import { FaUserCheck } from "react-icons/fa";
 import { FaCheckSquare } from "react-icons/fa";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
-import { fetchInvoice, fetchInvoiceById, getPdfFromServer, updateInvoiceById } from '../../../service/invoiceService';
+import {  fetchInvoiceById, getPdfFromServer, updateInvoiceById } from '../../../service/invoiceService';
 import { toast } from 'react-toastify';
 import { ItemsGet } from '../../../service/InvoiceItemsService';
 
@@ -73,6 +73,13 @@ discount_percentage: number;
     discount_percentage: number;
     isHeader?: boolean;
   }[];
+  payments: {
+    id?: number;
+    payment_method: string;
+    amount: string;
+    payment_date?: string;
+    transaction_reference?: string | null;
+  }[];
 }
 interface Item {
   id: number;
@@ -80,6 +87,7 @@ interface Item {
   unit: string;
   rate: number;
   tax: string;
+  
 }
 interface itemOptions {
   label: string;
@@ -93,7 +101,12 @@ export default function InvoiceEdit() {
   const [showCancelPopup, setshowCancelPopup] = useState<boolean>(false)
   const [invoiceDetails, setinvoiceDetails] = useState<updateState | null>(null)
   const [hideAndShowSummary, sethideAndShowSummary] = useState<boolean>(false)
-  const [paymentModes, setPaymentModes] = useState([{ mode: '', amount: '' }]);
+  const [deletedPaymentIds, setDeletedPaymentIds] = useState<number[]>([]);
+ const [paymentModes, setPaymentModes] = useState<{
+  id?: number;
+  mode: string;
+  amount: string;
+}[]>([]);
   const [openactionindex, setopenactionindex] = useState<number | null>(null)
   const [itemOptions, setItemOptions] = useState<itemOptions[]>([]);
   const [itemList, setItemList] = useState<Item[]>([]);
@@ -167,10 +180,15 @@ export default function InvoiceEdit() {
         items,
       });
 
-      setPaymentModes([{
-        mode: invdata.payment_method || 'cash',
-        amount: invdata.amount_received || 0
-      }]);
+const loadedPayments = invdata.payments?.length > 0
+  ? invdata.payments.map((p: any) => ({
+      id: p.id,
+      mode: p.payment_method,
+      amount: p.amount
+    }))
+  : [{ mode: invdata.payment_method || 'cash', amount: invdata.amount_received || '0' }];
+
+setPaymentModes(loadedPayments);
     })
     .catch((err) => {
       console.log(err);
@@ -298,47 +316,59 @@ const calculateAmount = (item: any) => {
 
 
     const updatedItemsList = invoiceDetails.items.map((item) => {
-      const isNewItem = typeof item.id !== 'number' || String(item.id).length > 6;
-      const discountPerc = item.discount_percentage;
-      const qty = parseFloat(item.quantity) || 0;
-      const price = parseFloat(item.unit_price) || 0;
+  const isNewItem = typeof item.id !== 'number' || String(item.id).length > 6;
+  const qty = parseFloat(item.quantity) || 0;
+  const price = parseFloat(item.unit_price) || 0;
+  const discountPerc = parseFloat(item.discount_percentage) || 0;
   const discountAmt = (qty * price * discountPerc) / 100;
-      return {
-        ...(isNewItem ? {} : { id: item.id }),
-        item_name: item.item_name,
-        quantity: qty,
-        unit_price: price,
-        tax_percentage: item.tax_percentage,
-        tax_amount: item.tax_amount || '0.00',
-        discount_percentage: discountPerc.toFixed(2),
-    discount_amount: discountAmt.toFixed(2),
-        total_amount: item.total_amount,
-        is_header: item.isHeader ? 1 : 0,
-        header_title: item.header_title || '',
-        description: '',
-        unit: '',
-        product_id: '',
-        within_state_tax_rate: null,
-        cross_state_tax_rate: null
-      };
-    });
-    const payload = {
-      invoice_no: invoiceDetails.invoice_number,
-      invoice_date: invoiceDetails.invoice_date,
-      due_date: invoiceDetails.due_date,
-      payment_terms: invoiceDetails.payment_terms,
-      customer_id: invoiceDetails.customer?.id || 1,
-      notes: invoiceDetails.notes,
-      payment_method: paymentModes[0]?.mode || 'cash',
-      amount_received: markAsFP==true? Number(totalAmount).toFixed(2):Number(paymentModes[0]?.amount || 0),
-      total_amount: Number(totalAmount).toFixed(2),
-      tax_amount: '0.00',
-      discount_amount: invoiceDetails.items?.discount_amount,
-      grand_total: Number(totalAmount).toFixed(2),
-      items: updatedItemsList,
-      deleted_item_ids: deletedItemIds,
-     
-    };
+  const base = qty * price;
+  const taxRate = parseFloat(item.tax_percentage) || 0;
+  const taxAmt = ((base - discountAmt) * taxRate) / 100;
+  const total = base - discountAmt + taxAmt;
+
+  return {
+    ...(isNewItem ? {} : { id: item.id }),
+    item_name: item.item_name,
+    description: item.description || '',
+    quantity: qty,
+    unit_price: price,
+    tax_rate: taxRate,           // Not tax_percentage
+    discount_rate: discountPerc, // Not discount_percentage
+    total: total.toFixed(2),     // Not total_amount
+    // Remove: is_header, header_title, etc. unless backend expects
+  };
+});
+    
+   const amountReceived = markAsFP 
+    ? Number(totalAmount).toFixed(2) 
+    : paymentModes.reduce((sum, p) => sum + Number(p.amount || 0), 0).toFixed(2);
+
+  const payload = {
+  customer_id: invoiceDetails.customer?.id || 1,
+  invoice_date: invoiceDetails.invoice_date,
+  due_date: invoiceDetails.due_date,
+  notes: invoiceDetails.notes,
+  payment_terms: invoiceDetails.payment_terms,
+  payments: markAsFP
+    ? [{
+        amount: Number(totalAmount).toFixed(2),
+        payment_method: paymentModes[0]?.mode || "cash",
+        payment_date: new Date().toISOString().split('T')[0],
+        notes: "Marked as fully paid"
+      }]
+    : paymentModes
+        .filter(p => p.mode && p.amount)
+        .map(p => ({
+          id: p.id, // Keep id for existing payments
+          amount: Number(p.amount).toFixed(2),
+          payment_method: p.mode,
+          payment_date: p.payment_date || new Date().toISOString().split('T')[0],
+          notes: p.notes || "Split payment"
+        })),
+  items: updatedItemsList,
+  deleted_payment_ids: deletedPaymentIds, // This is the key!
+};
+
     console.log("Payload being sent:", payload);
     updateInvoiceById(String(id), payload)
       .then((res) => {
@@ -571,7 +601,7 @@ const calculateAmount = (item: any) => {
               <tr className='payment-mode-table-th-row'>
                 <th>PAYMENT MODE</th>
                 <th style={{width:"50%"}}>AMOUNT RECEIVED</th>
-                {/* <th><img src={dustbinDelete} /></th> */}
+                <th><img src={dustbinDelete} /></th>
               </tr>
             </thead>
             <tbody>
@@ -598,29 +628,37 @@ const calculateAmount = (item: any) => {
                   </td>
                   <td className="payment-mode-table-enter-amount">
                     <input
-                      type="number"
-                      placeholder="Enter an amount"
-                      value={markAsFP ? totalAmount : paymentModes[index].amount}
-                      onChange={(e) => {
-                        const updatedRows = [...paymentModes];
-                        updatedRows[index] = {
-                          ...updatedRows[index],
-                          amount: (e.target.value)
-                        };
-                        setPaymentModes(updatedRows);
-                      }}
-                    />
+    type="number"
+    placeholder="Enter an amount"
+    value={markAsFP ? totalAmount : paymentModes[index].amount}
+    onChange={(e) => {
+      if (markAsFP) return; // Prevent editing when fully paid
+      const updatedRows = [...paymentModes];
+      updatedRows[index].amount = e.target.value;
+      setPaymentModes(updatedRows);
+    }}
+    disabled={markAsFP}
+  />
                   </td>
-                  {/* <td>
+                  <td>
                     <img
                       src={dustbinDelete}
                       style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        const updatedRows = paymentModes.filter((_, i) => i !== index);
-                        setPaymentModes(updatedRows);
-                      }}
+                     onClick={() => {
+  if (markAsFP) return; // Prevent delete when fully paid
+
+  const rowToDelete = paymentModes[index];
+
+  // If this payment came from the backend, mark it for deletion
+  if (rowToDelete.id) {
+    setDeletedPaymentIds((prev:any) => [...prev, rowToDelete.id]);
+  }
+
+  // Remove from UI
+  setPaymentModes(paymentModes.filter((_, i) => i !== index));
+}}
                     />
-                  </td> */}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -629,9 +667,9 @@ const calculateAmount = (item: any) => {
       </div>
       <div className="splitPayment-container pt-4">
         <div className='d-flex gap-3'>
-          {/* <button className='Split-payment-add-btn' onClick={() => setPaymentModes([...paymentModes, { mode: "", amount: "" }])}>
+          <button className='Split-payment-add-btn' onClick={() => setPaymentModes([...paymentModes, { mode: "", amount: "" }])}>
           <img src={addNewheadderIcon} />Add Split Payment
-        </button> */}
+        </button>
           <button onClick={() => setMarkasFp(!markAsFP)} className='Split-payment-add-btn d-flex align-items-center gap-2'>{markAsFP ? <FaCheckSquare style={{ color: "var(--color-accent)" }} /> : <MdCheckBoxOutlineBlank style={{ color: "var(--color-accent)" }} />} Mark As Fullu Paid</button>
         </div>
         <div className='total-nd-balance-container'>

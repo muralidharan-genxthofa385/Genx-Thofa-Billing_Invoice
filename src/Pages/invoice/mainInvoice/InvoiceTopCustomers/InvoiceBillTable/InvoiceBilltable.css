@@ -181,14 +181,14 @@ display: flex;
     font-weight: 400;
 }
 .invoice-save-print-buttons{
-    width: 100vw;
+    width: 100%;
     padding: 16px 33px 16px 33px;
     border-top: 1px solid var(--color-border) !important;
         border-bottom: 1px solid var(--color-border) !important;
-    position: fixed;
-    bottom: 5%;
+   
+
     background-color: white;
-    left: 11.7%;
+   
 }
 .invoice-save-print-buttons button{
     margin-left: 16px;

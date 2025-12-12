@@ -77,8 +77,8 @@ interface GroupedItemRow {
   items: ItemRow[];
 }
 type OptionType = {
-  label: string;
-  value: string;
+  label: string|null;
+  value: string|null;
 };
  
 function InvoiceBilltable({ topDetails, setTopDetails,resetBillTable, setResetBillTable}: Props) {
@@ -558,8 +558,8 @@ const addRow = (groupIndex: number, itemIndex: number) => {
 };
 const [itemList, setItemList] = useState<Item[]>([]);
 const [itemOptions, setItemOptions] = useState<itemOptions[]>([]);
-const [invoiceItems, setInvoiceItems] = useState<any[]>([]);
-const [invItemsRate,setInvItemsRate]=useState<number>(0)
+// const [invoiceItems, setInvoiceItems] = useState<any[]>([]);
+// const [invItemsRate,setInvItemsRate]=useState<number>(0)
  
 useEffect(() => {
   if (resetBillTable) {
@@ -848,7 +848,7 @@ const taxPercent = parseFloat(parts[1]?.replace('%', '') || '0');
     <tr className='payment-mode-table-th-row' >
     <th>PAYMENT MODE</th>
     <th style={{width:"30%"}}>AMOUNT RECEIVED</th>
-    {/* <th><img src={dustbinDelete}/></th> */}
+    <th><img src={dustbinDelete}/></th>
   </tr>
   </thead>
   <tbody>
@@ -862,7 +862,7 @@ const taxPercent = parseFloat(parts[1]?.replace('%', '') || '0');
   onCreateOption={handleCreate}
   options={PaymentMethodoptions}
   menuPortalTarget={document.body}
-  value={PaymentMethodoptions.find(option => option.value === payment.method) || null}
+  value={PaymentMethodoptions.find(option => option.value === payment.method) || undefined}
   styles={customStyles}
   components={{ IndicatorSeparator: () => null }}
   menuPosition="fixed"
@@ -878,9 +878,9 @@ const taxPercent = parseFloat(parts[1]?.replace('%', '') || '0');
             onChange={e => handleSplitPaymentChange(idx, 'amount', Number(e.target.value))}
           />
         </td>
-        {/* <td>
+        <td>
           <img src={dustbinDelete} onClick={() => deleteSplitPayment(idx)} style={{cursor: 'pointer'}} />
-        </td> */}
+        </td>
       </tr>
     ))}
   </tbody>
@@ -888,7 +888,9 @@ const taxPercent = parseFloat(parts[1]?.replace('%', '') || '0');
 </div>
       </div>
       <div className="splitPayment-container pt-4">
-        {/* <button className='Split-payment-add-btn' onClick={addSplitPayment}><img src={addNewheadderIcon}/>Add Split Payment</button> */}<div></div>
+        <button className='Split-payment-add-btn' onClick={addSplitPayment}><img src={addNewheadderIcon}/>Add Split Payment</button>
+        
+        <div></div>
 <div className='total-nd-balance-container'>
   <div className='d-flex flex-column align-items-end'>
     <h3>Total (₹) :<span>{totalAmount.toLocaleString()}</span></h3>

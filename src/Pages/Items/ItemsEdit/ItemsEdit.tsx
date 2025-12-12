@@ -68,9 +68,9 @@ const [crossStateTax, setCrossStateTax] = useState<{ value: number; label: strin
   const [itemDescription, setItemDescription] = useState('');
 
   const selecttaxOptions = [
-    { value: 'Taxable', label: 'Taxable' },
-    { value: 'Non-Taxable', label: 'Non - Taxable' },
-    { value: 'Out of Scope', label: 'Out of Scope' },
+    { value: 'taxable', label: 'Taxable' },
+    { value: 'non-taxable', label: 'Non - Taxable' },
+    { value: 'out-of-scope', label: 'Out of Scope' },
   ];
  const withinStateOptions = [
   { value: 0.0, label: 'GST 0 (0%)' },
