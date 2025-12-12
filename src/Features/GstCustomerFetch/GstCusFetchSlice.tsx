@@ -20,7 +20,6 @@ const initialState: cusgstFetch = {
   customerDetailsArray: [],
 };
 
-// 🔥 ASYNC THUNK: posts to API and updates store
 export const customerSlice = createSlice({
   name: "customerDetails",
   initialState,

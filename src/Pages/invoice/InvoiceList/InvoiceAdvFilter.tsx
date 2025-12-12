@@ -134,7 +134,7 @@ function InvoiceAdvFilter({ setAdvancedFilter,advancedFilter,setfiltereddata,fil
                                 <FormControlLabel sx={{ fontSize: "14px", fontWeight: "400", color: "var(--color-warning-text)" }} value="Advance" control={<Radio sx={{ transform: "scale(0.9)" }} />} label="Advance" />
                             </RadioGroup>
                         </FormControl>
-                        <div className="balance-amount">
+                        {/* <div className="balance-amount">
                             <p className='pt-4' style={{ fontWeight: "600", fontSize: "16px" }}>Balance Amount</p>
                             <div className="date-filter-row w-100" >
                                 <label className='date-fil-label w-50'> Min
@@ -142,7 +142,7 @@ function InvoiceAdvFilter({ setAdvancedFilter,advancedFilter,setfiltereddata,fil
                                 <label className='date-fil-label w-50'>Max
                                 <input placeholder='₹10000' value={filtereddata.balanceMax}  onChange={e => setfiltereddata({ ...filtereddata, balanceMax: Number(e.target.value) })}  type="number" /></label>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="advance-fillter-buttons d-flex justify-content-between mt-5">
                         <div className='d-flex gap-3'>

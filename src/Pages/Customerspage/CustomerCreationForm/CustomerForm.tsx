@@ -6,10 +6,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import React, { useState,useEffect } from "react";
 import warningicon from '../../../assets/Icons/WarningIcon.svg'
-import { AddNewCustomer, customersGstFetch } from "../../../service/CustomerService";
+import { AddNewCustomer, customersGstFetch, GetCustomersList } from "../../../service/CustomerService";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
+interface childProps{
+  newlyAddedCustomer: any;
+}
 
 function CustomerForm() {
 
@@ -55,6 +58,11 @@ const handleChange = (
     [name]: value,
   }));
 };
+
+
+
+
+{/**------------------------------------------------------------------------------------------------------------------------------------------------ */}
 
 const navigate=useNavigate();
 const [cancelbuttonaction,setCancelbuttonaction]=useState<boolean>(false)
@@ -219,7 +227,7 @@ const [spinner,setSpinner]=useState<boolean>(false)
     <select name="salutation" onChange={handleChange} id="" value={newCustomerformData.salutation} required >
    <option value=""  hidden>Salutation</option>
    <option value="mr">Mr.</option>
-   <option value="Ms">Ms.</option>
+   <option value="miss">Ms.</option>
    <option value="mrs">Mrs.</option>
    <option value="dr">Dr.</option>
     </select>

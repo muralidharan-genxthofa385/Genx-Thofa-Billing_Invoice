@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Inv_Top_cust_details.css';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoMdAdd } from 'react-icons/io';
@@ -7,6 +7,7 @@ import searchIcon from '../../../../assets/Icons/searchicon.svg';
 import Select from 'react-select';
 import { GetCustomersList } from '../../../../service/CustomerService';
 import warningSymbol from '../../../../assets/Icons/WarningIcon.svg'
+import { CustomerDropContext } from '../../../../Context/CustomerContext';
 
 
 interface CustomerOption {
@@ -26,11 +27,15 @@ interface Props {
     paymentMethod: string;
     amountReceived: string;
   };
+   customerOptions: CustomerOption[];
+  setCustomerOptions: React.Dispatch<React.SetStateAction<CustomerOption[]>>;
   setTopDetails: React.Dispatch<React.SetStateAction<any>>;
   renderNewcustPop: () => void;
   selectedCustomer: CustomerOption | null;
   setSelectedCustomer: React.Dispatch<React.SetStateAction<CustomerOption | null>>;
   setResetBillTable?: (reset: boolean) => void;
+  recentCustomer: CustomerOption | null;
+  // fetchCustomersdropdown:()=>void;
 }
 
 function Inv_Top_cust_details({
@@ -40,22 +45,35 @@ function Inv_Top_cust_details({
   selectedCustomer,
   setSelectedCustomer,
   setResetBillTable,
+  // fetchCustomersdropdown
 }: Props) {
   const [customerOptions, setCustomerOptions] = useState<CustomerOption[]>([]);
-  const navigate = useNavigate();
+  const [updatedCustomerOptions, setUpdatedCustomerOptions] = useState<CustomerOption[]>([]);
 
+/
+  
   const fetchCustomers = async () => {
     const res = await GetCustomersList();
     const customers = res.data || res;
 
-    setCustomerOptions([
-      { label: 'Add New Customer', value: 'add-new', isNew: true },
-      ...customers.map((customer: any) => ({
+   setCustomerOptions([
+  { label: 'Add New Customer', value: 'add-new', isNew: true },
+  ...customers.map((customer: any) => ({
+    value: customer.id,
+    label: customer.customer_name,
+  })),
+    { label: 'Add New Customer', value: 'add-new', isNew: true },
+]);
+
+    setUpdatedCustomerOptions([
+       ...customers.map((customer: any) => ({
         value: customer.id,
         label: customer.customer_name,
       })),
-    ]);
+    ])
   };
+
+  // const newCustomer=updatedCustomerOptions[updatedCustomerOptions.length - 1];
 
   useEffect(() => {
     fetchCustomers();
@@ -69,7 +87,7 @@ function Inv_Top_cust_details({
     return;
   }
 
-  if (selectedCustomer && selected.value !== selectedCustomer.value) {
+  if (selectedCustomer && selected.value !== selectedCustomer.value){
     setPendingCustomer(selected);
     setCustomerSwitchDiv(true);         
   } else {
@@ -111,7 +129,21 @@ function Inv_Top_cust_details({
 const [customerSwitchDiv, setCustomerSwitchDiv] = useState<boolean>(false);
 const [pendingCustomer, setPendingCustomer] = useState<CustomerOption | null>(null);
 
-  console.log(selectedCustomer)
+useEffect(() => {
+  if (!selectedCustomer && customerOptions.length > 1) {
+    const actualCustomers = customerOptions.filter(opt => opt.value !== 'add-new');
+    const lastCustomer = actualCustomers[actualCustomers.length - 1];
+
+    if (lastCustomer) {
+      setSelectedCustomer(lastCustomer);
+      setTopDetails((prev:any) => ({
+        ...prev,
+        customerId: lastCustomer.value,
+      }));
+    }
+  }
+}, [customerOptions, selectedCustomer, setSelectedCustomer, setTopDetails]);
+
 
   return (
     <div className="inv-cust-det-container">
@@ -203,7 +235,6 @@ const [pendingCustomer, setPendingCustomer] = useState<CustomerOption | null>(nu
               }
             />
           </label>
-
           <label className="invoice-label">
             Payment Terms
             <select
@@ -258,7 +289,6 @@ const [pendingCustomer, setPendingCustomer] = useState<CustomerOption | null>(nu
                   paymentMethod: '',
                   amountReceived: '',
                 }));
-                // Reset bill table data when switching customer
                 if (setResetBillTable) {
                   setResetBillTable(true);
                 }

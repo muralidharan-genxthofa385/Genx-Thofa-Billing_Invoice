@@ -8,7 +8,7 @@ import filterIcon from '../../../assets/Icons/FilterIcon.svg'
 import threedotselector from '../../../assets/Icons/threedotselector.svg'
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchInvoice,deleteInvoice } from '../../../service/invoiceService';
 import tr_closeIcon from '../../../assets/Icons/closecrossicon.svg'
 import tr_editIcon from '../../../assets/Icons/tableEditIcon.svg'
@@ -41,11 +41,10 @@ function InvoiceList(){
     const [filteredInvoices, setFilteredInvoices] = useState<any[]>([]);
 const [advancedFilter,setAdvancedFilter]=useState<boolean>(false)
 
-const dispatch=useDispatch();
+const renderInvTableActions = (index: number) => {
+  setActiveActionIndex(prevIndex => (prevIndex === index ? null : index));
+};
 
-    const renderInvTableActions = (index: number) => {
-        setActiveActionIndex(prevIndex => (prevIndex === index ? null : index));
-    };
 
     const actionRef=useRef<HTMLDivElement|null>(null)
 
@@ -83,18 +82,17 @@ const dispatch=useDispatch();
     }
     setFilteredInvoices(filtered);
 };
+const location=useLocation()
 
 
 useEffect(() => {
-        fetchInvoice()
-            .then((res) => {
-                setAllInvoices(res.data.data);
-                setFilteredInvoices(res.data.data);
-                console.log(res.data.data)
-            })
-            .catch((err) => console.log('invoice fetch Error', err));
-    }, []);
-
+  fetchInvoice()
+    .then((res) => {
+      setAllInvoices(res.data.data);
+      setFilteredInvoices(res.data.data);
+    })
+    .catch((err) => console.log('invoice fetch Error', err));
+}, [location.state?.refresh]);
     useEffect(() => {
         applyFilters();
         setCurrentPage(1); 
@@ -193,6 +191,9 @@ const applyAdvancedFilter = () => {
   });
   setFilteredInvoices(filtered);
 };
+
+
+
 
     return (
         <div className="invoice-list-container">

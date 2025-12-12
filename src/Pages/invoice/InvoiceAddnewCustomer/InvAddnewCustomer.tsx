@@ -10,13 +10,18 @@ renderNewcustPop:()=>void;
 }
 
 function InvAddnewCustomer({renderNewcustPop}:props) {
+    const [childData, setChildData] = useState(null);
 
+const handleChildPayload = (payload: any) => {
+    console.log('Received from child:', payload);
+    setChildData(payload);
+  };
 
   return (
     <>
      <div className="inv-add-New_customer-container">
       <div className='Back-To-InvCreation-cont' onClick={renderNewcustPop}>  <h1 className='Back-To-InvCreation' ><IoIosArrowBack/>Back</h1></div>
-<CustomerForm/>
+<CustomerForm   />
         </div>
     </>
   )

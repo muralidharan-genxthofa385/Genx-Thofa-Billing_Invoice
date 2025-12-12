@@ -30,7 +30,7 @@ balance_due:number;
 
 const CustomersTable=()=> {
      const [customers, setCustomers] = useState<CustomerList[]>([])
-     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+     const [rowsPerPage, setRowsPerPage] = useState<number>(15);
      const [currentPage, setCurrentPage] = useState<number>(1);
      const [searchCust,setSearchcust]=useState<string>('')
 
@@ -144,7 +144,7 @@ const deleteCustomer=(id:number)=>{
             <td>{customers.company_name}</td>
             <td>{customers.email}</td>
             <td>{customers.phone}</td>
-            <td>₹{customers.balance_due}</td>
+            <td>₹{customers.balance_due.toFixed(2)}</td>
         </tr>)}
 
     </tbody>

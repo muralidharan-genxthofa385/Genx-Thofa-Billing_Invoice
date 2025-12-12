@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import React, { useState,useEffect } from "react";
 import warningicon from '../../../assets/Icons/WarningIcon.svg'
-import { AddNewCustomer, customersGstFetch } from "../../../service/CustomerService";
+import { AddNewCustomer, customersGstFetch, GetCustomersList } from "../../../service/CustomerService";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,13 +14,15 @@ interface props{
   renderNewcustPop:()=>void
   refreshCustomerList :()=>void
    onCustomerCreated: (newCustomer: any) => void;
- 
+   newCustPop:boolean,
 }
 
 
-function InvCustCreation({renderNewcustPop,refreshCustomerList, onCustomerCreated}:props) {
+function InvCustCreation({renderNewcustPop,refreshCustomerList, onCustomerCreated,newCustPop}:props) {
 
     const [selectedId, setSelectedId] = useState<string>('main');
+        const [recentCustomer,setRecentCustomer]=useState([])
+
 
 
   const [sameShippAdd, setsameShippAdd] = useState<boolean>(true);
@@ -63,7 +65,6 @@ const handleChange = (
   }));
 };
 
-const navigate=useNavigate();
 
 const [cancelbuttonaction,setCancelbuttonaction]=useState<boolean>(false)
 
@@ -162,18 +163,21 @@ const handleAddNewCustomer = (e: React.FormEvent) => {
       toast.success("Customer added successfully");
       refreshCustomerList();
       if (onCustomerCreated) {
-        // Try to get id and customer_name from response, fallback to payload
         onCustomerCreated({
-          id: res?.id || res?.data?.id || payload.customer_name, // fallback if API doesn't return id
+          id: res?.id || res?.data?.id || payload.customer_name, 
           customer_name: res?.customer_name || res?.data?.customer_name || payload.customer_name
         });
       }
-      renderNewcustPop();   
+      renderNewcustPop();
+      if(res==true&&newCustPop==false){
+toast.success('customer created successfully')
+      }   
     })
     .catch((err) => {
       console.error(err);
       toast.error("Failed to add customer");
-    });
+    })
+    .finally(()=>window.location.reload())
 };
 
 useEffect(() => {
@@ -196,11 +200,24 @@ useEffect(() => {
   newCustomerformData.billingPincode,
 ]);
 
+// const NewAddedCustomer = () => {
+// GetCustomersList()
+// .then((res)=>{
+//   console.log('newly added customer',res.data[res.data.length - 1])
+//   setRecentCustomer(res.data[res.data.length - 1])
+// })
+// .catch((err)=>toast.error('failed to create a customer'))
+// };
+
+//  const newlyAddedCustomer = useEffect(() => {
+//   NewAddedCustomer();
+// }, []);
+
 
   return (
     <div className="new-inv-customer-ovr">
-    <div className="new-inv-customer-form">
-    <div style={{backgroundColor:"white",width:"1340px",padding:"1%",borderRadius:"1%"}}>
+    <div className="new-inv-customer-form" style={{marginLeft:"12%"}}>
+    <div style={{backgroundColor:"white",width:"1340px",padding:"1%",borderRadius:"1%",marginLeft:"9%"}}>
 <Link to={``} onClick={()=>{renderNewcustPop()}} className="new-customer-heading" ><IoIosArrowBack /> New Customer</Link>
 <form className="New-Customer-form" onSubmit={handleAddNewCustomer} >
 <div className="newcustomer-form-row">
@@ -241,7 +258,7 @@ useEffect(() => {
     <select name="salutation" onChange={handleChange} id="" value={newCustomerformData.salutation} required >
    <option value=""  hidden>Salutation</option>
    <option value="mr">Mr.</option>
-   <option value="ms">Ms.</option>
+   <option value="miss">Ms.</option>
    <option value="mrs">Mrs.</option>
    <option value="dr">Dr.</option>
     </select>
@@ -255,7 +272,6 @@ useEffect(() => {
 <input type="text" name="company" value={newCustomerformData.company} onChange={handleChange} placeholder="Company Name" style={{width:"35rem"}} />
 </div>
 </div>
-
 
 <div className="newcustomer-form-row">
 <div className="newcustomer-form-row-left-pan">
