@@ -97,7 +97,7 @@ function ItemsTable() {
     <>
 <div className="itemstable-overall">
     <div className="expenseTableHeadder d-flex w-100" style={{gap:"42%"}}>
-        <h3 className='expense-headder-heading'>Items</h3>
+        <h3 className='expense-headder-heading' style={{width:"30%"}}>Items</h3>
             <div className="expenseTable-Filter-Container" style={{width:"80%",paddingLeft:"12%"}}>
         {tableSearch&&<label className='clear-filter-span' onClick={()=>setTableSearch('')}><img src={clearFilterIcon} alt="" />Clear Filter</label>}
 

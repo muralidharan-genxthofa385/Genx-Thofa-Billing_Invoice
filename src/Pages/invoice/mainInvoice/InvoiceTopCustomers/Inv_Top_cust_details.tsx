@@ -50,8 +50,6 @@ function Inv_Top_cust_details({
   const [customerOptions, setCustomerOptions] = useState<CustomerOption[]>([]);
   const [updatedCustomerOptions, setUpdatedCustomerOptions] = useState<CustomerOption[]>([]);
 
-/
-  
   const fetchCustomers = async () => {
     const res = await GetCustomersList();
     const customers = res.data || res;
@@ -73,7 +71,6 @@ function Inv_Top_cust_details({
     ])
   };
 
-  // const newCustomer=updatedCustomerOptions[updatedCustomerOptions.length - 1];
 
   useEffect(() => {
     fetchCustomers();
@@ -160,34 +157,47 @@ useEffect(() => {
           <label className="select-customer-label invoice-label">
             Customer Name <img src={searchIcon} />
             <Select
-              className="select-customer-dropdown"
-              options={customerOptions}
-              onChange={handleCustomerSelect}
-              placeholder="Select or search customer"
-              isSearchable
-              styles={{
-                placeholder: (base) => ({
-                  ...base,
-                  paddingLeft: '38px',
-                  color: '#888',
-                  fontWeight: '500',
-                  fontSize: '14px',
-                }),
-                input: (base) => ({ ...base, paddingLeft: '38px' }),
-                singleValue: (base) => ({ ...base, paddingLeft: '38px' }),
-              }}
-              formatOptionLabel={(e: CustomerOption) =>
-                e.isNew ? (
-                  <span className="inv-customer-select-drop">
-                    <IoMdAdd />
-                    {e.label}
-                  </span>
-                ) : (
-                  e.label
-                )
-              }
-              value={selectedCustomer}
-            />
+  className="select-customer-dropdown"
+  options={customerOptions}
+  onChange={handleCustomerSelect}
+  placeholder="Select or search customer"
+  isSearchable
+  styles={{
+    placeholder: (base) => ({
+      ...base,
+      paddingLeft: '38px',
+      color: '#888',
+      fontWeight: '500',
+      fontSize: '14px',
+    }),
+    input: (base) => ({ ...base, paddingLeft: '38px' }),
+    singleValue: (base) => ({ ...base, paddingLeft: '38px' }),
+  }}
+  formatOptionLabel={(e: CustomerOption) =>
+    e.isNew ? (
+      <span className="inv-customer-select-drop">
+        <IoMdAdd />
+        {e.label}
+      </span>
+    ) : (
+      e.label
+    )
+  }
+  value={selectedCustomer}
+  noOptionsMessage={({ inputValue }) =>
+    inputValue ? (
+      <span
+        style={{ display: "flex", alignItems: "center", gap: "5px", cursor: "pointer",fontWeight:600,color:"var(--color-accent)" }}
+        onClick={renderNewcustPop}
+      >
+        <IoMdAdd /> Add New Customer "{inputValue}"
+      </span>
+    ) : (
+      "No customers found"
+    )
+  }
+/>
+
           </label>
 
           <label className="select-salesperson-label invoice-label">

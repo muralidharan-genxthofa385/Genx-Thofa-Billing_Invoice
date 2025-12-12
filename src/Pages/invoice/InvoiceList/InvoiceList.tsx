@@ -17,7 +17,22 @@ import { toast } from 'react-toastify';
 import InvoiceAdvFilter from './InvoiceAdvFilter';
 import { useDispatch } from 'react-redux';
 
-
+interface filterdata {
+  name: string,
+  mobile: string,
+  mail: string,
+  customer_type: string,
+  invoice_date: string,
+  due_date: string,
+  status: string,
+  createdBtwFrom: string,
+  createdBtwTo: string,
+  lastInvoiceDateFrom: string,    
+  lastInvoiceDateTo: string,     
+  created_at: string,             
+  balanceMin: number,
+  balanceMax: number,
+}
 interface invoiceLists {
     id: string |number
     invoice_number: string,
@@ -148,7 +163,7 @@ useEffect(() => {
       });
   }
 };
-const [filtereddata, setfiltereddata] = useState({
+const [filtereddata, setfiltereddata] = useState<filterdata>({
   name: '',
   mobile: '',
   mail: '',
@@ -158,9 +173,31 @@ const [filtereddata, setfiltereddata] = useState({
   status: '',
   createdBtwFrom: '',
   createdBtwTo: '',
+  lastInvoiceDateFrom: '',    
+  lastInvoiceDateTo: '',      
+  created_at: '',             
   balanceMin: 0,
   balanceMax: 0,
 });
+const resetAdvancedFilter = () => {
+  setfiltereddata({
+    name: '',
+    mobile: '',
+    mail: '',
+    customer_type: '',
+    invoice_date: '',
+    due_date: '',
+    status: '',
+    createdBtwFrom: '',
+    createdBtwTo: '',
+    lastInvoiceDateFrom: '',
+    lastInvoiceDateTo: '',
+    created_at: '',
+    balanceMin: 0,
+    balanceMax: 0,
+  });
+  setFilteredInvoices(allInvoices);
+};
 
 const applyAdvancedFilter = () => {
   const filtered = allInvoices.filter((fil) => {
@@ -239,7 +276,7 @@ const applyAdvancedFilter = () => {
                 <table>
                     <thead>
                         <tr style={{ backgroundColor: "var(--whitebg)" }}>
-                            <th style={{ cursor: "pointer" }}><img src={threedotselector} /></th>
+                            <th style={{ cursor: "pointer" }}><img src={threedotselector}/></th>
                             <th>S.No</th>
                             <th>Date</th>
                             <th>Invoice No.</th>
@@ -314,6 +351,7 @@ const applyAdvancedFilter = () => {
      allInvoices={allInvoices}
      setAllInvoices={setAllInvoices}
     setfiltereddata={setfiltereddata}
+      resetAdvancedFilter={resetAdvancedFilter}
   />
 )} 
 </div>

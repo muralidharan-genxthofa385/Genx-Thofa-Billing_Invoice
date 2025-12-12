@@ -97,8 +97,8 @@ tbody tr:nth-child(odd) {
 
 /* Status badge styles */
 .status-paid {
-  background: var(--color-success-dark);
-  color: #fff;
+  border: 1px solid var(--color-success-dark);
+  color: var(--color-success-dark);
   padding: 4px 16px;
   border-radius: 16px;
   font-weight: 600;
@@ -106,8 +106,9 @@ tbody tr:nth-child(odd) {
   display: inline-block;
 }
 .status-notpaid {
-  background-color: #FBDFDF;
+  border:1px solid #da5a5a;
   color: var(--color-warning);
+    border: 1px solid var(--color-warning);
   padding: 4px 16px;
   border-radius: 16px;
   font-weight: 600;
@@ -115,8 +116,8 @@ tbody tr:nth-child(odd) {
   display: inline-block;
 }
 .status-advance {
-  background: var(--color-highlight);
-  color: #fff;
+  border:1px solid var(--color-highlight);
+  color:var(--color-highlight);
   padding: 4px 16px;
   border-radius: 16px;
   font-weight: 600;

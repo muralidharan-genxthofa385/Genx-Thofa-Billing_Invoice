@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AddnewItems.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaChevronLeft } from "react-icons/fa";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -82,7 +82,7 @@ ItemsPost(payloadItemsData)
     });
 }
 
-
+const navigate=useNavigate()
   return (
     <>
     <Link className='new-item-head' to={`/Items`} ><FaChevronLeft/> New Item</Link>
@@ -160,7 +160,7 @@ ItemsPost(payloadItemsData)
         </div>
         <div className='customers-view-buttons'>
         <button onClick={handlePostNewItem}>Save</button>
-        <button>Cancel</button>
+        <button onClick={()=>navigate('/Items')}>Cancel</button>
       </div>
 </div>
 

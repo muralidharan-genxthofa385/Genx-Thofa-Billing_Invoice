@@ -38,6 +38,7 @@ discount_percentage: number;
   notes: string | null;
   payment_method: string;
   discount_amount: number;
+  status:string;
   customer: {
     id?: number;
     company_name: string;
@@ -90,7 +91,6 @@ export default function InvoiceEdit() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [showCancelPopup, setshowCancelPopup] = useState<boolean>(false)
-  const [renderItemActions, setRenderItemActions] = useState<boolean>(false)
   const [invoiceDetails, setinvoiceDetails] = useState<updateState | null>(null)
   const [hideAndShowSummary, sethideAndShowSummary] = useState<boolean>(false)
   const [paymentModes, setPaymentModes] = useState([{ mode: '', amount: '' }]);
@@ -149,7 +149,7 @@ export default function InvoiceEdit() {
   fetchInvoiceById(id)
     .then((res) => {
       const invdata = res.data; 
-
+      console.log(invdata)
       const items = invdata.items.map((item: any) => ({
         ...item,
         discount_percentage: parseFloat(item.discount_percentage) || 0,
@@ -295,22 +295,13 @@ const calculateAmount = (item: any) => {
 
   const handleEditInvoiceSave = async () => {
     if (!invoiceDetails) return;
-    const calculatedTotalAmount = Number(totalAmount) || 0;
-    const calculatedAmountReceived = Number(amountRecieved) || 0;
-    let status = "unpaid";
-    if (calculatedAmountReceived === 0) {
-      status = "unpaid";
-    } else if (calculatedAmountReceived >= calculatedTotalAmount) {
-      status = "paid";
-    } else if (calculatedAmountReceived > 0 && calculatedAmountReceived < calculatedTotalAmount) {
-      status = "advance";
-    }
+
 
     const updatedItemsList = invoiceDetails.items.map((item) => {
       const isNewItem = typeof item.id !== 'number' || String(item.id).length > 6;
-       const discountPerc = item.discount_percentage; 
-  const qty = parseFloat(item.quantity) || 0;
-  const price = parseFloat(item.unit_price) || 0;
+      const discountPerc = item.discount_percentage;
+      const qty = parseFloat(item.quantity) || 0;
+      const price = parseFloat(item.unit_price) || 0;
   const discountAmt = (qty * price * discountPerc) / 100;
       return {
         ...(isNewItem ? {} : { id: item.id }),
@@ -339,13 +330,14 @@ const calculateAmount = (item: any) => {
       customer_id: invoiceDetails.customer?.id || 1,
       notes: invoiceDetails.notes,
       payment_method: paymentModes[0]?.mode || 'cash',
-      amount_received: Number(paymentModes[0]?.amount || 0),
+      amount_received: markAsFP==true? Number(totalAmount).toFixed(2):Number(paymentModes[0]?.amount || 0),
       total_amount: Number(totalAmount).toFixed(2),
       tax_amount: '0.00',
       discount_amount: invoiceDetails.items?.discount_amount,
       grand_total: Number(totalAmount).toFixed(2),
       items: updatedItemsList,
-      deleted_item_ids: deletedItemIds
+      deleted_item_ids: deletedItemIds,
+     
     };
     console.log("Payload being sent:", payload);
     updateInvoiceById(String(id), payload)
@@ -359,6 +351,8 @@ const calculateAmount = (item: any) => {
         toast.error("Failed to update invoice");
       });
   };
+
+
   const invoicePdfGenerator = async () => {
     try {
       const response = await getPdfFromServer(String(id));
@@ -576,8 +570,8 @@ const calculateAmount = (item: any) => {
             <thead>
               <tr className='payment-mode-table-th-row'>
                 <th>PAYMENT MODE</th>
-                <th>AMOUNT RECEIVED</th>
-                <th><img src={dustbinDelete} /></th>
+                <th style={{width:"50%"}}>AMOUNT RECEIVED</th>
+                {/* <th><img src={dustbinDelete} /></th> */}
               </tr>
             </thead>
             <tbody>
@@ -617,7 +611,7 @@ const calculateAmount = (item: any) => {
                       }}
                     />
                   </td>
-                  <td>
+                  {/* <td>
                     <img
                       src={dustbinDelete}
                       style={{ cursor: 'pointer' }}
@@ -626,7 +620,7 @@ const calculateAmount = (item: any) => {
                         setPaymentModes(updatedRows);
                       }}
                     />
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
@@ -634,15 +628,16 @@ const calculateAmount = (item: any) => {
         </div>
       </div>
       <div className="splitPayment-container pt-4">
-        <div className='d-flex gap-3'><button className='Split-payment-add-btn' onClick={() => setPaymentModes([...paymentModes, { mode: "", amount: "" }])}>
+        <div className='d-flex gap-3'>
+          {/* <button className='Split-payment-add-btn' onClick={() => setPaymentModes([...paymentModes, { mode: "", amount: "" }])}>
           <img src={addNewheadderIcon} />Add Split Payment
-        </button>
+        </button> */}
           <button onClick={() => setMarkasFp(!markAsFP)} className='Split-payment-add-btn d-flex align-items-center gap-2'>{markAsFP ? <FaCheckSquare style={{ color: "var(--color-accent)" }} /> : <MdCheckBoxOutlineBlank style={{ color: "var(--color-accent)" }} />} Mark As Fullu Paid</button>
         </div>
         <div className='total-nd-balance-container'>
           <div className='d-flex flex-column align-items-end'>
             <h3>Total (₹) :<span>{totalAmount}</span></h3>
-            <h3 className='balance-amount-h3'>Balance Amount (₹) :<span>{markAsFP == true ? 0 : balance_Amount}</span></h3>
+            <h3 className='balance-amount-h3'>Balance Amount (₹) :<span>{markAsFP == true ? 0 : balance_Amount.toFixed(2)}</span></h3>
           </div>
         </div>
       </div>

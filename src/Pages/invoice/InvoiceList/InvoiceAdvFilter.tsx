@@ -26,7 +26,7 @@ interface props {
         created_at:string,
          balanceMin:number,
   balanceMax:number
-    }
+    },
      allInvoices: any[];
      setAllInvoices:any;
      setFilteredInvoices:any,

@@ -3,6 +3,13 @@ import './dashboard.css'
 import expenseout from '../../assets/Icons/expenseOutIcon.svg'
 import { fetchInvoice } from '../../service/invoiceService';
 import { getExpences } from '../../service/ExpensesService';
+import { CgDanger } from "react-icons/cg";
+import { FaMoneyBillTrendUp } from "react-icons/fa6";
+import { GiMoneyStack } from "react-icons/gi";
+import { GiTakeMyMoney } from "react-icons/gi";
+
+
+
 
 interface Expense {
   id: number;
@@ -37,9 +44,7 @@ console.log(res)
 },[])
 
 
-
 const [expenseTableData,setexpenseTableData]=useState<Expense[]>([])
-
 
 useEffect(()=>{
 getExpences()
@@ -53,14 +58,14 @@ const TotalDashDisplayAmount = dashrecentInvoice.reduce(
   (total, item) => total + parseFloat(item.grand_total || "0"),
   0
 );
-const total_grandtotal = dashrecentInvoice.reduce(
-  (total, inv) => total + parseFloat(inv.grand_total || "0"),
+
+
+
+const total_paid=dashrecentInvoice.reduce(
+  (total, item) => total + parseFloat(item.amount_received || "0"),
   0
 );
-
-
-const total_paid=total_grandtotal
-const totalUnpaid = TotalDashDisplayAmount - total_paid>0?0:TotalDashDisplayAmount - total_paid;
+const totalUnpaid = total_paid >= TotalDashDisplayAmount ? 0 : TotalDashDisplayAmount - total_paid;
 
 
 
@@ -69,14 +74,18 @@ return (
    {<div className='Dashboard-container'>
 <h2>Dashboard</h2>
 <div className='dash-board-amount-display-container'>
-<div className='dash-board-total-display'>
-  <label><h5>Total Sales</h5> <h1>₹ { TotalDashDisplayAmount.toFixed(3)}</h1></label>
+<div className='dash-board-total-display d-flex justify-content-between' style={{height:"100%",alignItems:"center"}}>
+  <label><h5>Total Sales</h5> <h1>₹ { TotalDashDisplayAmount.toFixed(2)}</h1></label>
+<GiMoneyStack fontSize={50}/>
 </div>
-<div  className='dash-board-Paid-display'>
+<div  className='dash-board-Paid-display d-flex justify-content-between' style={{height:"100%",alignItems:"center"}}>
     <label><h5>Paid</h5> <h1>₹ {total_paid.toFixed(2)}</h1></label>
+<GiTakeMyMoney fontSize={50}/>
+
 </div>
-<div className='dash-board-unpaid-display'>
+<div className='dash-board-unpaid-display d-flex justify-content-between' style={{height:"100%",alignItems:"center"}}>
 <label><h5>Unpaid</h5> <h1>₹ {totalUnpaid.toFixed(2)}</h1></label>
+<CgDanger fontSize={40}/>
 </div>
 </div>
 
@@ -99,7 +108,7 @@ return (
             <td>{row.customer?.customer_name}</td>
             <td>₹ {row.total_amount}</td>
             <td style={{width:"max-content"}}>
-              <span className={
+              <span style={{width:"60%"}} className={
                 row.status === "PAID".toLowerCase() ? "status-paid" :
                 row.status === "ADVANCE".toLowerCase()  ? "status-advance":row.status === "UNPAID".toLowerCase()  ? "status-notpaid" :""}>
                 {row.status}
@@ -125,9 +134,9 @@ return (
         </tr>
       </thead>
       <tbody>
-       {expenseTableData.slice(0,5).map((expense) => (
+       {expenseTableData.slice(0,5).map((expense,index) => (
   <tr key={expense.id}>
-    <td style={{ padding: "2.7%" }}>{expense.id}</td>
+    <td style={{ padding: "2.7%" }}>{index+1}</td>
     <td>{expense.expense_date.slice(0,10)}</td>
     <td>{expense.vendor_name}</td>
     <td style={{ padding: "0.375rem 1.25rem",fontWeight:"600",color:"var(--color-warning)",alignItems:"center",height:"100%" }}>
@@ -141,9 +150,7 @@ return (
 ))}
       </tbody>
 </table></div>
-
 </div>
-
 </div>
     </div>}
     </>

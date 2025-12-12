@@ -46,6 +46,7 @@ axios.post(`http://127.0.0.1:8000/api/auth/login`,{email,password})
       setRenderSpinner(true)
       setrenderGenxLogo(true)
       toast.success("Login Successfull")
+    
       setTimeout(()=>{
     navigate('/Dashboard')
       },5000)

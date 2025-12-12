@@ -168,7 +168,7 @@ const handleAddNewCustomer = (e: React.FormEvent) => {
           customer_name: res?.customer_name || res?.data?.customer_name || payload.customer_name
         });
       }
-      renderNewcustPop();
+      // renderNewcustPop();
       if(res==true&&newCustPop==false){
 toast.success('customer created successfully')
       }   
@@ -177,7 +177,11 @@ toast.success('customer created successfully')
       console.error(err);
       toast.error("Failed to add customer");
     })
-    .finally(()=>window.location.reload())
+    .finally(()=>
+    setTimeout(()=>{
+window.location.reload()
+    },1200)
+  )
 };
 
 useEffect(() => {

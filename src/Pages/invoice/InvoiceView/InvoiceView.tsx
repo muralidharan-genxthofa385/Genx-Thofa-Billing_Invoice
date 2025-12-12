@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import './InvoiceView.css';
 import { FaChevronLeft } from "react-icons/fa";
 import { useEffect, useState } from 'react';
-import { fetchInvoice, getPdfFromServer } from '../../../service/invoiceService';
+import { fetchInvoice, fetchInvoiceById, getPdfFromServer } from '../../../service/invoiceService';
 import editPencil from '../../../assets/Icons/editPencilIcon.svg'
 import printSymbol from '../../../assets/Icons/printIcon.svg'
 import { toast } from 'react-toastify';
@@ -56,15 +56,25 @@ function InvoiceView() {
 
     const {id}=useParams();
     const[invoiceView,setInvoiceView]=useState<invoiceDetails|null>(null)
-    useEffect(()=>{
-        fetchInvoice()
-        .then((res)=>{
-            const selectedView=res.data.data.find((inv:any)=>String(inv.id)===id);
-            setInvoiceView(selectedView)
-            console.log("invoice ",selectedView)
-        })
-        .catch(res=>console.log(res))
-    },[id])
+    // useEffect(()=>{
+    //     fetchInvoice()
+    //     .then((res)=>{
+    //         const selectedView=res.data.data.find((inv:any)=>String(inv.id)===id);
+    //         setInvoiceView(selectedView)
+    //         console.log("invoice ",selectedView)
+    //     })
+    //     .catch(res=>console.log(res))
+    // },[id])
+
+      useEffect(() => {
+    if (!id) return;
+    fetchInvoiceById(id) 
+      .then((res) => {
+        setInvoiceView(res.data);
+        console.log("Invoice: ", res.data);
+      })
+      .catch((err) => console.error("Error fetching invoice", err));
+  }, [id]);
 
 let subtotal = 0;
 let taxAmount = 0;

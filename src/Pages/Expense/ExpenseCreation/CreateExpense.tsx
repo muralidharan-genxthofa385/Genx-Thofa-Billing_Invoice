@@ -79,11 +79,7 @@ const expenseData = {
       console.log(expenseData)
     })
     .catch((err) => {
-    if (!customerName || !expenseDate || !selectedCategoryOption || !ExpenseAmount) {
-  toast.error("Please fill all required fields");
-  return;
-}
-
+  // toast.error("FAILED TO CREATE EXPENSE");
       console.log(err)
     });
 };
