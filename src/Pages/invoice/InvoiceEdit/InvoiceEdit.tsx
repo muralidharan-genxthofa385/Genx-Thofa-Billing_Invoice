@@ -156,13 +156,14 @@ export default function InvoiceEdit() {
     { value: 'cheque', label: 'Cheque' },
   ];
 
-  useEffect(() => {
+ useEffect(() => {
   if (!id) return;
 
   fetchInvoiceById(id)
     .then((res) => {
-      const invdata = res.data; 
-      console.log(invdata)
+      const invdata = res.data;
+
+      // === ITEMS MAPPING (unchanged) ===
       const items = invdata.items.map((item: any) => ({
         ...item,
         discount_percentage: parseFloat(item.discount_percentage) || 0,
@@ -180,15 +181,25 @@ export default function InvoiceEdit() {
         items,
       });
 
-const loadedPayments = invdata.payments?.length > 0
-  ? invdata.payments.map((p: any) => ({
-      id: p.id,
-      mode: p.payment_method,
-      amount: p.amount
-    }))
-  : [{ mode: invdata.payment_method || 'cash', amount: invdata.amount_received || '0' }];
+      // === PAYMENTS: ONLY USE BACKEND DATA ===
+      let loadedPayments = [];
 
-setPaymentModes(loadedPayments);
+      if (invdata.payments && Array.isArray(invdata.payments) && invdata.payments.length > 0) {
+        loadedPayments = invdata.payments.map((p: any) => ({
+          id: p.id,
+          mode: p.payment_method,
+          amount: p.amount || '0'
+        }));
+      } else if (invdata.payment_method || invdata.amount_received) {
+        // Only fallback if NO payments array at all
+        loadedPayments = [{
+          mode: invdata.payment_method || 'cash',
+          amount: invdata.amount_received || '0'
+        }];
+      }
+
+      setPaymentModes(loadedPayments);
+      setDeletedPaymentIds([]); // Reset deleted IDs on load
     })
     .catch((err) => {
       console.log(err);
